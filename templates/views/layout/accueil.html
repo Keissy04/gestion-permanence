@@ -1,0 +1,33 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+
+<div class="col-md-7">
+    <div style="display: flex;">
+        <div style="position: relative; border-top-left-radius: 20px; border-bottom-left-radius: 20px; overflow: hidden; flex: 1;">
+            <a href="/w3images/lights.jpg" style="display: block;">
+                <img src="" alt="Lights" style="width:100%; border-top-left-radius: 20px; border-bottom-left-radius: 20px;opacity:0.5">
+            </a>
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: #0771B8; opacity: 0.5;"></div>
+        </div>
+        <div style="width:10cm; flex: 1; background-color: white; padding: 20px; border-top-right-radius: 20px; border-bottom-right-radius: 20px;">
+            <div class="caption" style="margin-top: 50px">
+                <h2 style="color: #0771B8; margin-top: 20px;">Bienvenue</h2>
+                <br>
+                <p class="card-description">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    <br><br>
+                    Connectez-vous ou inscrivez-vous pour accéder aux fonctionnalités.
+                </p>
+                <br>
+                    <a href="" class="btn btn-primary">Se connecter</a>
+                    <a href="" class="btn btn-info">S'inscrire</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

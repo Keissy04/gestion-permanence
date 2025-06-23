@@ -1,0 +1,46 @@
+.card-body h4{
+    color:  #0771B8;
+    font-size: 20px !important;
+}
+
+.card .card-title{
+    color:  #0771B8;
+}
+
+table a{
+    color: inherit; /* Utilise la couleur par défaut du texte */
+    text-decoration: none; /* Supprime le soulignement par défaut */
+}
+
+table a:hover
+{
+    color: inherit; /* Utilise la couleur par défaut du texte */
+    text-decoration: none; /* Supprime le soulignement par défaut */
+}
+
+/* Styles pour supprimer la bordure du bouton */
+.btn-unstyled {
+    border: none;
+    padding: 0; /* Supprime le rembourrage par défaut */
+    background-color: transparent; /* Supprime la couleur de fond par défaut */
+}
+.table-container {
+    overflow-y: auto;
+    max-height: 500px; /* ajustez la hauteur maximale selon vos besoins */
+}
+
+.mb-3 label{
+    font-size: 13px;
+    color: #777777 ;
+}
+.p-style{
+    font-size: 15px;
+    font-weight: bolder;
+    color: #777777;
+}
+
+.page-body-wrapper {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+  }
+  

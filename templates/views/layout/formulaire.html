@@ -1,0 +1,76 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+
+<div id="error-message" class="alert alert-danger" style="display: none;">
+    <p id="error-text">{{ error_message if error_message else '' }}</p>
+    <button id="close-error" class="btn btn-danger">OK</button>
+</div>
+
+<div class="col-md-7 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <br>
+            <h4 class="card-title">Insertion d'équipement</h4>
+            <p class="card-description">Entrer un nouvel équipement</p>
+            <br>
+
+            <form action="/equipements/create" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <input type="text" name="description" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label for="serial_number" class="form-label">Numéro de série</label>
+                            <input type="text" name="serial_number" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        
+                        <div class="mb-3">
+                            <label for="activation_date" class="form-label">Date d'activation</label>
+                            <input type="date" name="activation_date" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="amortization_end_date" class="form-label">Date fin amortissement</label>
+                            <input type="date" name="amortization_end_date" class="form-control">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary form-control">Créer</button>
+                        <br>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="col-4 grid-margin">
+    <div class="card">
+        <div class="card-body">
+            <p class="card-description">Importer fichier CSV</p>
+            <form action="/equipements/import" method="post" enctype="multipart/form-data">
+                <input type="file" name="csv_file" accept=".csv" class="btn btn-secondary form-control">
+                <br><br>
+                <button type="submit" class="btn btn-primary form-control">Importer</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('close-error').addEventListener('click', function () {
+        document.getElementById('error-message').style.display = 'none';
+    });
+
+    <!-- {% if error_message %}
+        document.getElementById('error-message').style.display = 'block';
+    {% endif %} -->
+</script>
+
+{% endblock %}

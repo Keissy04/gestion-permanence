@@ -1,0 +1,71 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+
+	<div ><a href="" class="btn btn-primary form-control">Nouveau</a></div>
+    <div class="col-lg-8 grid-margin stretch-card">
+        <div class="card">
+          <div class="card-body">
+            <br>
+            <h4 class="card-title">Liste des utilisateurs d'équipement</h4>
+            <li class="nav-item nav-search d-none d-lg-block" style="width: 500px">
+                <div class="input-group">
+                  <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                    <span class="input-group-text" id="search">
+                      <i class="icon-search"></i>
+                    </span>
+                  </div>
+                  <input type="text" class="form-control" placeholder="Chercher un utilisateur" aria-label="search" aria-describedby="search" id="search-input">
+                </div>
+              </li>
+              <br>
+              <br><br>
+              <div class="table-responsive table-container">
+                <table class="table table-striped " id="employees-table">
+                    <thead>
+                        <tr>
+                            <th>Nom</th>
+
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       <tr>
+                                <td>Rakoto</td>
+
+                                <td>
+                                    <div class="d-flex gap-2">
+                                        <a href="" class=" mr-2">
+                                            <span class="input-group-prepend hover-cursor " id="navbar-search-icon">
+                                                <span class="input-group-text bg-success" id="search">
+                                                    <i class="icon-plus "></i>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    
+                                        <a href="" class="mr-2">
+                                            <span class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                                                <span class="input-group-text bg-info" id="search">
+                                                  <i class="icon-tag "></i>
+                                                </span>
+                                            </span>
+                                        </a>
+                                        
+                                        <a href="" class="mr-2">
+                                            <span class="input-group-prepend hover-cursor" id="navbar-search-icon">
+                                                <span class="input-group-text bg-danger" id="search">
+                                                  <i class="icon-trash "></i>
+                                                </span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+              </div>
+          </div>
+        </div>
+    </div>
+
+{% endblock %}
