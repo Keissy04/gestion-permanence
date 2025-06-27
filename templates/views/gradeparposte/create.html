@@ -1,0 +1,39 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Associer un grade à un poste</h4>
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            <form method="post" action="/gradeparposte/create">
+                <div class="mb-3">
+                    <label for="poste_id" class="form-label">Poste</label>
+                    <select class="form-control" id="poste_id" name="poste_id" required>
+                        <option value="">-- Choisir un poste --</option>
+                        {% for poste in postes %}
+                        <option value="{{ poste.id }}">{{ poste.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="grade_id" class="form-label">Grade</label>
+                    <select class="form-control" id="grade_id" name="grade_id" required>
+                        <option value="">-- Choisir un grade --</option>
+                        {% for grade in grades %}
+                        <option value="{{ grade.id }}">{{ grade.abreviation }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary form-control">Associer</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Modifier Grade</h4>
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            <form method="post" action="/grades/edit/{{ grade.id }}">
+                <div class="mb-3">
+                    <label for="titre" class="form-label">Titre</label>
+                    <input type="text" class="form-control" id="titre" name="titre" value="{{ grade.titre }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="abreviation" class="form-label">Abréviation</label>
+                    <input type="text" class="form-control" id="abreviation" name="abreviation" value="{{ grade.abreviation }}" required>
+                </div>
+
+                <button type="submit" class="btn btn-success form-control">Modifier</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

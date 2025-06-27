@@ -1,0 +1,37 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Modifier l'association Grade ↔ Poste</h4>
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            <form method="post" action="/gradeparposte/edit/{{ relation.id }}">
+                <div class="mb-3">
+                    <label for="poste_id" class="form-label">Poste</label>
+                    <select class="form-control" id="poste_id" name="poste_id" required>
+                        {% for poste in postes %}
+                        <option value="{{ poste.id }}" {% if poste.id == relation.poste_id %}selected{% endif %}>{{ poste.nom }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="grade_id" class="form-label">Grade</label>
+                    <select class="form-control" id="grade_id" name="grade_id" required>
+                        {% for grade in grades %}
+                        <option value="{{ grade.id }}" {% if grade.id == relation.grade_id %}selected{% endif %}>{{ grade.abreviation }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success form-control">Modifier</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

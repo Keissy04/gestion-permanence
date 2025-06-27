@@ -1,0 +1,79 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div><a href="/postes/create" class="btn btn-primary form-control">Nouveau</a></div>
+
+<div class="col-lg-8 grid-margin stretch-card mt-3">
+  <div class="card">
+    <div class="card-body">
+      <br>
+      <h4 class="card-title text-dark">Liste des postes</h4>
+
+      <li class="nav-item nav-search d-none d-lg-block" style="width: 500px">
+        <div class="input-group">
+          <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+            <span class="input-group-text" id="search">
+              <i class="icon-search"></i>
+            </span>
+          </div>
+          <input type="text" class="form-control" placeholder="Chercher un poste" aria-label="search" aria-describedby="search" id="search-input">
+        </div>
+      </li>
+
+      <br><br><br>
+
+      <div class="table-responsive table-container">
+        <table class="table table-striped" id="poste-table">
+          <thead>
+            <tr>
+              <th>Nom</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for poste in postes %}
+            <tr>
+              <td>{{ poste.nom }}</td>
+              <td>
+                <div class="d-flex gap-2">
+                  <a href="/postes/edit/{{ poste.id }}">
+                    <span class="input-group-prepend hover-cursor">
+                      <span class="input-group-text bg-primary">
+                        <i class="icon-paper text-white"></i>
+                      </span>
+                    </span>
+                  </a>
+                  <a href="/postes/delete/{{ poste.id }}" onclick="return confirm('Supprimer ce poste ?');">
+                    <span class="input-group-prepend hover-cursor">
+                      <span class="input-group-text bg-danger">
+                        <i class="icon-trash text-white"></i>
+                      </span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('input.form-control').forEach(input => {
+    input.addEventListener('input', function () {
+      const filter = this.value.toLowerCase();
+      const container = this.closest('.card, .table-container, .grid-margin') || document;
+      const table = container.querySelector('table');
+      const rows = table?.querySelectorAll('tbody tr') || [];
+
+      rows.forEach(row => {
+        const rowText = row.textContent.toLowerCase();
+        row.style.display = rowText.includes(filter) ? '' : 'none';
+      });
+    });
+  });
+</script>
+{% endblock %}
