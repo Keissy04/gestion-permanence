@@ -1,13 +1,13 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-<div><a href="/gradeparposte/create" class="btn btn-primary form-control">Nouveau</a></div>
+<div><a href="/employes/create" class="btn btn-primary form-control">Nouveau</a></div>
 
 <div class="col-lg-8 grid-margin stretch-card mt-3">
   <div class="card">
     <div class="card-body">
       <br>
-      <h4 class="card-title text-dark">Liste des correspondances Grade ↔ Poste</h4>
+      <h4 class="card-title text-dark">Liste des employés</h4>
 
       <li class="nav-item nav-search d-none d-lg-block" style="width: 500px">
         <div class="input-group">
@@ -16,36 +16,34 @@
               <i class="icon-search"></i>
             </span>
           </div>
-          <input type="text" class="form-control" placeholder="Chercher un grade ou un poste" aria-label="search" aria-describedby="search" id="search-input">
+          <input type="text" class="form-control" placeholder="Chercher un nom" aria-label="search" aria-describedby="search" id="search-input">
         </div>
       </li>
 
       <br><br><br>
 
       <div class="table-responsive table-container">
-        <table class="table table-striped" id="gradeparposte-table">
+        <table class="table table-striped" id="employe-table">
           <thead>
             <tr>
-              <th>Poste</th>
-              <th>Grade</th>
+              <th>Nom</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            {% for relation in relations %}
+            {% for employe in employes %}
             <tr>
-              <td>{{ relation.poste.nom }}</td>
-              <td>{{ relation.grade.abreviation }}</td>
+              <td>{{ employe.nom }}</td>
               <td>
                 <div class="d-flex gap-2">
-                  <a href="/gradeparposte/edit/{{ relation.id }}">
+                  <a href="/employes/edit/{{ employe.id }}">
                     <span class="input-group-prepend hover-cursor">
                       <span class="input-group-text bg-primary">
                         <i class="icon-paper text-white"></i>
                       </span>
                     </span>
                   </a>
-                  <a href="/gradeparposte/delete/{{ relation.id }}" onclick="return confirm('Supprimer cette relation ?');">
+                  <a href="/employes/delete/{{ employe.id }}" onclick="return confirm('Supprimer cet employé ?');">
                     <span class="input-group-prepend hover-cursor">
                       <span class="input-group-text bg-danger">
                         <i class="icon-trash text-white"></i>

@@ -1,0 +1,24 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-4 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Créer un Employé</h4>
+
+            {% if error %}
+                <div class="alert alert-danger">{{ error }}</div>
+            {% endif %}
+
+            <form method="post" action="/employes/create">
+                <div class="mb-3">
+                    <label for="nom" class="form-label">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" required>
+                </div>
+
+                <button type="submit" class="btn btn-primary form-control">Créer</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -75,23 +75,4 @@
     </div>
   </div>
 </div>
-<script>
-    document.querySelectorAll('input.form-control').forEach(input => {
-      input.addEventListener('input', function () {
-        const filter = this.value.toLowerCase();
-    
-        // Cherche la table la plus proche dans le même bloc visuel
-        const container = this.closest('.card, .table-container, .grid-margin') || document;
-        const table = container.querySelector('table');
-        const rows = table?.querySelectorAll('tbody tr') || [];
-    
-        rows.forEach(row => {
-          const rowText = row.textContent.toLowerCase();
-          row.style.display = rowText.includes(filter) ? '' : 'none';
-        });
-      });
-    });
-    </script>
-    
-
 {% endblock %}

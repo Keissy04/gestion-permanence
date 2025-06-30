@@ -1,0 +1,46 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Modifier une affectation</h4>
+
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" action="/affectations/edit/{{ affectation.id }}">
+        <div class="mb-3">
+          <label for="id_employe" class="form-label">Employé</label>
+          <select class="form-control" name="id_employe" required>
+            {% for emp in employes %}
+              <option value="{{ emp.id }}" {% if emp.id == affectation.id_employe %}selected{% endif %}>{{ emp.nom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="id_departement" class="form-label">Département</label>
+          <select class="form-control" name="id_departement" required>
+            {% for dep in departements %}
+              <option value="{{ dep.id }}" {% if dep.id == affectation.id_departement %}selected{% endif %}>{{ dep.nom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="date_debut" class="form-label">Date début</label>
+          <input type="date" class="form-control" name="date_debut" value="{{ affectation.date_debut }}">
+        </div>
+
+        <div class="mb-3">
+          <label for="date_fin" class="form-label">Date fin</label>
+          <input type="date" class="form-control" name="date_fin" value="{{ affectation.date_fin }}">
+        </div>
+        <button type="submit" class="btn btn-success form-control">Modifier</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
