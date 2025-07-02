@@ -1,0 +1,67 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div><a href="/employegrades/create" class="btn btn-success form-control">Nouveau</a></div>
+
+<div class="col-lg-8 grid-margin stretch-card mt-3">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title text-dark">Historique des grades des employés</h4>
+
+      <li class="nav-item nav-search d-none d-lg-block" style="width: 500px">
+        <div class="input-group">
+          <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+            <span class="input-group-text" id="search">
+              <i class="icon-search"></i>
+            </span>
+          </div>
+          <input type="text" class="form-control" placeholder="Chercher un nom" id="search-input">
+        </div>
+      </li>
+
+      <br><br><br>
+
+      <div class="table-responsive table-container">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Employé</th>
+              <th>Poste</th>
+              <th>Grade</th>
+              <th>Date début</th>
+              <th>Date fin</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for relation in relations %}
+            <tr>
+              <td>{{ relation.employe.nom }}</td>
+              <td>{{ relation.grade_par_poste.poste.nom }}</td>
+              <td>{{ relation.grade_par_poste.grade.abreviation }}</td>
+              <td>{{ relation.date_debut.strftime('%d %B %Y') }}</td>
+              <td>{{ relation.date_fin.strftime('%d %B %Y') if relation.date_fin else "En cours" }}
+              </td>
+              <td>
+                <div class="d-flex gap-2">
+                  <a href="/employegrades/edit/{{ relation.id }}" class=" mr-2">
+                    <span class="input-group-text bg-success">
+                      <i class="icon-paper text-white"></i>
+                    </span>
+                  </a>
+                  <a href="/employegrades/delete/{{ relation.id }}" onclick="return confirm('Supprimer ?');" class=" mr-2">
+                    <span class="input-group-text bg-danger">
+                      <i class="icon-trash text-white"></i>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

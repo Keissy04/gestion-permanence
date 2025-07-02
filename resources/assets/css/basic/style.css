@@ -44,3 +44,25 @@ table a:hover
     margin-left: 0 !important;
   }
   
+  .nav .nav-item .nav-link:hover {
+    background-color: #57B657 !important;
+    color: white !important;
+  }
+
+  .nav .nav-item .nav-link:hover .menu-icon {
+    color: white !important;
+  }
+
+  .nav .nav-item .nav-link {
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+  /* Activer le vert si le <li> est actif */
+.sidebar .nav .nav-item.active > .nav-link {
+    background-color: #57B657 !important;
+    color: white !important;
+  }
+  
+  /* Et l’icône aussi */
+  .sidebar .nav .nav-item.active > .nav-link .menu-icon {
+    color: white !important;
+  }

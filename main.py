@@ -9,7 +9,11 @@ from app.controllers import posteController
 from app.controllers import gradeParPosteController
 from app.controllers import employeController
 from app.controllers import affectationController
+from app.controllers import employeGradeController
+# from app.init_db import init_db
 app = FastAPI()
+
+# init_db()
 
 # Sert les fichiers statiques
 app.mount("/static", StaticFiles(directory="app/resources"), name="static")
@@ -28,6 +32,7 @@ app.include_router(posteController.router)
 app.include_router(gradeParPosteController.router)
 app.include_router(employeController.router)
 app.include_router(affectationController.router)
+app.include_router(employeGradeController.router)
 
 # Page d'accueil
 @app.get("/", response_class=HTMLResponse)

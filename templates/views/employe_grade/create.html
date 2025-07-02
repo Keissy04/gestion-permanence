@@ -1,0 +1,49 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Nouvelle affectation de grade</h4>
+
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" action="/employegrades/create">
+        <div class="mb-3">
+          <label for="id_employe" class="form-label">Employé</label>
+          <select class="form-control" name="id_employe" required>
+            <option value="">-- Choisir --</option>
+            {% for emp in employes %}
+              <option value="{{ emp.id }}">{{ emp.nom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="id_grade_par_poste" class="form-label">Grade / Poste</label>
+          <select class="form-control" name="id_grade_par_poste" required>
+            <option value="">-- Choisir --</option>
+            {% for gpp in gradeparpostes %}
+              <option value="{{ gpp.id }}">{{ gpp.grade.abreviation }} - {{ gpp.poste.nom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="date_debut" class="form-label">Date début</label>
+          <input type="date" class="form-control" name="date_debut" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="date_fin" class="form-label">Date fin</label>
+          <input type="date" class="form-control" name="date_fin">
+        </div>
+
+        <button type="submit" class="btn btn-primary form-control">Valider</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

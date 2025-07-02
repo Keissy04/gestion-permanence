@@ -1,0 +1,49 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Modifier affectation de grade</h4>
+
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" action="/employegrades/edit/{{ relation.id }}">
+        <div class="mb-3">
+          <label for="id_employe" class="form-label">Employé</label>
+          <select class="form-control" name="id_employe" required>
+            {% for emp in employes %}
+              <option value="{{ emp.id }}" {% if emp.id == relation.id_employe %}selected{% endif %}>{{ emp.nom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="id_grade_par_poste" class="form-label">Grade / Poste</label>
+          <select class="form-control" name="id_grade_par_poste" required>
+            {% for gpp in gradeparpostes %}
+              <option value="{{ gpp.id }}" {% if gpp.id == relation.id_grade_par_poste %}selected{% endif %}>
+                {{ gpp.grade.abreviation }} - {{ gpp.poste.nom }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="date_debut" class="form-label">Date début</label>
+          <input type="date" class="form-control" name="date_debut" value="{{ relation.date_debut }}">
+        </div>
+
+        <div class="mb-3">
+          <label for="date_fin" class="form-label">Date fin</label>
+          <input type="date" class="form-control" name="date_fin" value="{{ relation.date_fin.strftime('%Y-%m-%d') if relation.date_fin else '' }}">
+        </div>
+
+        <button type="submit" class="btn btn-success form-control">Modifier</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
