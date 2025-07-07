@@ -12,19 +12,21 @@
 
       <form method="post" action="/affectations/edit/{{ affectation.id }}">
         <div class="mb-3">
-          <label for="id_employe" class="form-label">Employé</label>
-          <select class="form-control" name="id_employe" required>
-            {% for emp in employes %}
-              <option value="{{ emp.id }}" {% if emp.id == affectation.id_employe %}selected{% endif %}>{{ emp.nom }}</option>
+          <label for="id_employe_grade" class="form-label">Employé</label>
+          <select class="form-control" name="id_employe_grade" required>
+            {% for eg in employe_grades %}
+              <option value="{{ eg.id }}" {% if eg.id == affectation.id_employe_grade %}selected{% endif %}>
+                {{ eg.employe.nom }} ({{ eg.grade_par_poste.grade.nom }} - {{ eg.grade_par_poste.poste.nom }})
+              </option>
             {% endfor %}
           </select>
-        </div>
+        </div>        
 
         <div class="mb-3">
           <label for="id_departement" class="form-label">Département</label>
           <select class="form-control" name="id_departement" required>
             {% for dep in departements %}
-              <option value="{{ dep.id }}" {% if dep.id == affectation.id_departement %}selected{% endif %}>{{ dep.nom }}</option>
+              <option value="{{ dep.id }}" {% if dep.id == affectation.id_departement %}selected{% endif %}>{{ dep.abreviation }}</option>
             {% endfor %}
           </select>
         </div>

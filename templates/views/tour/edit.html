@@ -1,0 +1,23 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Modifier un tour</h4>
+
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" action="/tours/edit/{{ tour.id }}">
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom du tour</label>
+          <input type="text" class="form-control" name="nom" value="{{ tour.nom }}" required>
+        </div>
+        <button type="submit" class="btn btn-success form-control">Modifier</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

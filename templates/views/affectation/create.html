@@ -12,11 +12,13 @@
 
       <form method="post" action="/affectations/create">
         <div class="mb-3">
-          <label for="id_employe" class="form-label">Employé</label>
-          <select class="form-control" name="id_employe" required>
+          <label for="id_employe_grade" class="form-label">Employé</label>
+          <select class="form-control" name="id_employe_grade" required>
             <option value="">-- Choisir --</option>
-            {% for emp in employes %}
-              <option value="{{ emp.id }}">{{ emp.nom }}</option>
+            {% for eg in employe_grades %}
+              <option value="{{ eg.id }}">
+                {{ eg.employe.nom }} ({{ eg.grade_par_poste.grade.nom }} - {{ eg.grade_par_poste.poste.nom }})
+              </option>
             {% endfor %}
           </select>
         </div>

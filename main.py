@@ -10,6 +10,7 @@ from app.controllers import gradeParPosteController
 from app.controllers import employeController
 from app.controllers import affectationController
 from app.controllers import employeGradeController
+from app.controllers import tourController
 # from app.init_db import init_db
 app = FastAPI()
 
@@ -33,6 +34,7 @@ app.include_router(gradeParPosteController.router)
 app.include_router(employeController.router)
 app.include_router(affectationController.router)
 app.include_router(employeGradeController.router)
+app.include_router(tourController.router)
 
 # Page d'accueil
 @app.get("/", response_class=HTMLResponse)

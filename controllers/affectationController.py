@@ -3,9 +3,11 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlalchemy.orm import Session
 from datetime import date
+from typing import Optional
+
 from app.database import get_db
 from app.models.affectation import Affectation
-from app.models.employe import Employe
+from app.models.employe_grade import EmployeGrade
 from app.models.departement import Departement
 
 router = APIRouter(tags=["Affectations HTML"])
@@ -23,11 +25,11 @@ def list_affectations(request: Request, db: Session = Depends(get_db)):
 # Formulaire création
 @router.get("/affectations/create", response_class=HTMLResponse)
 def create_form(request: Request, db: Session = Depends(get_db)):
-    employes = db.query(Employe).all()
+    employe_grades = db.query(EmployeGrade).all()
     departements = db.query(Departement).all()
     return templates.TemplateResponse("views/affectation/create.html", {
         "request": request,
-        "employes": employes,
+        "employe_grades": employe_grades,
         "departements": departements,
         "error": ""
     })
@@ -36,17 +38,17 @@ def create_form(request: Request, db: Session = Depends(get_db)):
 @router.post("/affectations/create")
 def create_affectation(
     request: Request,
-    id_employe: int = Form(...),
+    id_employe_grade: int = Form(...),
     id_departement: int = Form(...),
     date_debut: date = Form(...),
-    date_fin: date = Form(None),
+    date_fin: Optional[str] = Form(None),  # ← accepte chaîne vide
     db: Session = Depends(get_db)
 ):
     affectation = Affectation(
-        id_employe=id_employe,
+        id_employe_grade=id_employe_grade,
         id_departement=id_departement,
         date_debut=date_debut,
-        date_fin=date_fin
+        date_fin=date.fromisoformat(date_fin) if date_fin else None
     )
     db.add(affectation)
     db.commit()
@@ -56,12 +58,12 @@ def create_affectation(
 @router.get("/affectations/edit/{id}", response_class=HTMLResponse)
 def edit_form(id: int, request: Request, db: Session = Depends(get_db)):
     affectation = db.query(Affectation).filter(Affectation.id == id).first()
-    employes = db.query(Employe).all()
+    employe_grades = db.query(EmployeGrade).all()
     departements = db.query(Departement).all()
     return templates.TemplateResponse("views/affectation/edit.html", {
         "request": request,
         "affectation": affectation,
-        "employes": employes,
+        "employe_grades": employe_grades,
         "departements": departements,
         "error": ""
     })
@@ -71,18 +73,18 @@ def edit_form(id: int, request: Request, db: Session = Depends(get_db)):
 def update_affectation(
     id: int,
     request: Request,
-    id_employe: int = Form(...),
+    id_employe_grade: int = Form(...),
     id_departement: int = Form(...),
     date_debut: date = Form(...),
-    date_fin: date = Form(None),
+    date_fin: Optional[str] = Form(None),
     db: Session = Depends(get_db)
 ):
     affectation = db.query(Affectation).filter(Affectation.id == id).first()
     if affectation:
-        affectation.id_employe = id_employe
+        affectation.id_employe_grade = id_employe_grade
         affectation.id_departement = id_departement
         affectation.date_debut = date_debut
-        affectation.date_fin = date_fin
+        affectation.date_fin = date.fromisoformat(date_fin) if date_fin else None
         db.commit()
     return RedirectResponse(url="/affectations", status_code=303)
 

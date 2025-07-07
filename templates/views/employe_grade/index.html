@@ -1,7 +1,7 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-<div><a href="/employegrades/create" class="btn btn-success form-control">Nouveau</a></div>
+<div><a href="/employegrades/create" class="btn btn-primary form-control">Nouveau</a></div>
 
 <div class="col-lg-8 grid-margin stretch-card mt-3">
   <div class="card">
@@ -19,8 +19,25 @@
         </div>
       </li>
 
-      <br><br><br>
-
+      <br>
+      <!-- Pagination Bootstrap -->
+      <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <li class="page-item {% if page == 1 %}disabled{% endif %}">
+            <a class="page-link" href="?page={{ page - 1 }}" tabindex="-1">Précédent</a>
+          </li>
+          {% for p in range(1, pages + 1) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+              <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+            </li>
+          {% endfor %}
+          <li class="page-item {% if page == pages %}disabled{% endif %}">
+            <a class="page-link" href="?page={{ page + 1 }}">Suivant</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- End Pagination Bootstrap -->
+       
       <div class="table-responsive table-container">
         <table class="table table-striped">
           <thead>
@@ -36,20 +53,23 @@
           <tbody>
             {% for relation in relations %}
             <tr>
-              <td>{{ relation.employe.nom }}</td>
-              <td>{{ relation.grade_par_poste.poste.nom }}</td>
+              <td style="white-space: normal; word-break: break-word; max-width: 250px; line-height: 1.6;">
+                {{ relation.employe.nom }}
+              </td>
+              <td style="white-space: normal; word-break: break-word; max-width: 250px; line-height: 1.6;">
+                {{ relation.grade_par_poste.poste.nom }}
+              </td>
               <td>{{ relation.grade_par_poste.grade.abreviation }}</td>
               <td>{{ relation.date_debut.strftime('%d %B %Y') }}</td>
-              <td>{{ relation.date_fin.strftime('%d %B %Y') if relation.date_fin else "En cours" }}
-              </td>
+              <td>{{ relation.date_fin.strftime('%d %B %Y') if relation.date_fin else "En cours" }}</td>
               <td>
                 <div class="d-flex gap-2">
-                  <a href="/employegrades/edit/{{ relation.id }}" class=" mr-2">
-                    <span class="input-group-text bg-success">
+                  <a href="/employegrades/edit/{{ relation.id }}" class="mr-2">
+                    <span class="input-group-text bg-primary">
                       <i class="icon-paper text-white"></i>
                     </span>
                   </a>
-                  <a href="/employegrades/delete/{{ relation.id }}" onclick="return confirm('Supprimer ?');" class=" mr-2">
+                  <a href="/employegrades/delete/{{ relation.id }}" onclick="return confirm('Supprimer ?');" class="mr-2">
                     <span class="input-group-text bg-danger">
                       <i class="icon-trash text-white"></i>
                     </span>

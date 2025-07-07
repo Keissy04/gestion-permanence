@@ -12,8 +12,8 @@
 
             <form method="post" action="/gradeparposte/create">
                 <div class="mb-3">
-                    <label for="poste_id" class="form-label">Poste</label>
-                    <select class="form-control" id="poste_id" name="poste_id" required>
+                    <label for="id_poste" class="form-label">Poste</label>
+                    <select class="form-control" id="id_poste" name="id_poste" required>
                         <option value="">-- Choisir un poste --</option>
                         {% for poste in postes %}
                         <option value="{{ poste.id }}">{{ poste.nom }}</option>
@@ -22,8 +22,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="grade_id" class="form-label">Grade</label>
-                    <select class="form-control" id="grade_id" name="grade_id" required>
+                    <label for="id_grade" class="form-label">Grade</label>
+                    <select class="form-control" id="id_grade" name="id_grade" required>
                         <option value="">-- Choisir un grade --</option>
                         {% for grade in grades %}
                         <option value="{{ grade.id }}">{{ grade.abreviation }}</option>

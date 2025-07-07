@@ -6,8 +6,8 @@ class GradeParPoste(Base):
     __tablename__ = "grade_par_poste"
 
     id = Column(Integer, primary_key=True, index=True)
-    grade_id = Column(Integer, ForeignKey("grades.id"), nullable=False)
-    poste_id = Column(Integer, ForeignKey("postes.id"), nullable=False)
+    id_grade = Column(Integer, ForeignKey("grades.id"), nullable=False)
+    id_poste = Column(Integer, ForeignKey("postes.id"), nullable=False)
 
     grade = relationship("Grade")
     poste = relationship("Poste")

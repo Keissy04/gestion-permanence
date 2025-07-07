@@ -10,10 +10,18 @@ templates = Jinja2Templates(directory="app/templates")
 
 # Liste
 @router.get("/employes", response_class=HTMLResponse)
-def list_employes(request: Request, db: Session = Depends(get_db)):
-    employes = db.query(Employe).all()
-    return templates.TemplateResponse("views/employe/index.html", {"request": request, "employes": employes})
+def list_employes(request: Request, db: Session = Depends(get_db), page: int = 1):
+    per_page = 5
+    total = db.query(Employe).count()
+    pages = (total + per_page - 1) // per_page
+    employes = db.query(Employe).offset((page - 1) * per_page).limit(per_page).all()
 
+    return templates.TemplateResponse("views/employe/index.html", {
+        "request": request,
+        "employes": employes,
+        "page": page,
+        "pages": pages
+    })
 # Création - formulaire
 @router.get("/employes/create", response_class=HTMLResponse)
 def create_form(request: Request):

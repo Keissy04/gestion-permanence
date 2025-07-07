@@ -36,14 +36,14 @@
               <td>{{ poste.nom }}</td>
               <td>
                 <div class="d-flex gap-2">
-                  <a href="/postes/edit/{{ poste.id }}">
+                  <a href="/postes/edit/{{ poste.id }}" class=" mr-2">
                     <span class="input-group-prepend hover-cursor">
                       <span class="input-group-text bg-success">
                         <i class="icon-paper text-white"></i>
                       </span>
                     </span>
                   </a>
-                  <a href="/postes/delete/{{ poste.id }}" onclick="return confirm('Supprimer ce poste ?');">
+                  <a href="/postes/delete/{{ poste.id }}" onclick="return confirm('Supprimer ce poste ?');" class=" mr-2">
                     <span class="input-group-prepend hover-cursor">
                       <span class="input-group-text bg-danger">
                         <i class="icon-trash text-white"></i>

@@ -14,13 +14,18 @@ templates = Jinja2Templates(directory="app/templates")
 
 
 @router.get("/employegrades", response_class=HTMLResponse)
-def list_employe_grades(request: Request, db: Session = Depends(get_db)):
-    data = db.query(EmployeGrade).all()
+def list_employe_grades(request: Request, db: Session = Depends(get_db), page: int = 1):
+    per_page = 10
+    total = db.query(EmployeGrade).count()
+    pages = (total + per_page - 1) // per_page
+    data = db.query(EmployeGrade).offset((page - 1) * per_page).limit(per_page).all()
+
     return templates.TemplateResponse("views/employe_grade/index.html", {
         "request": request,
-        "relations": data
+        "relations": data,
+        "page": page,
+        "pages": pages
     })
-
 
 @router.get("/employegrades/create", response_class=HTMLResponse)
 def create_form(request: Request, db: Session = Depends(get_db)):

@@ -1,0 +1,23 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Nouveau tour</h4>
+
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <form method="post" action="/tours/create">
+        <div class="mb-3">
+          <label for="nom" class="form-label">Nom du tour</label>
+          <input type="text" class="form-control" name="nom" required>
+        </div>
+        <button type="submit" class="btn btn-primary form-control">Valider</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 {% extends "views/layout/base.html" %}
 
 {% block content %}
-<div><a href="/employes/create" class="btn btn-success form-control">Nouveau</a></div>
+<div><a href="/employes/create" class="btn btn-primary form-control">Nouveau</a></div>
 
 <div class="col-lg-8 grid-margin stretch-card mt-3">
   <div class="card">
@@ -19,9 +19,36 @@
           <input type="text" class="form-control" placeholder="Chercher un nom" aria-label="search" aria-describedby="search" id="search-input">
         </div>
       </li>
-
-      <br><br><br>
-
+      <br>
+      <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+      
+          <!-- Bouton Précédent -->
+          <li class="page-item {% if page <= 1 %}disabled{% endif %}">
+            <a class="page-link" href="?page={{ page - 1 if page > 1 else 1 }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+      
+          <!-- Pages numérotées -->
+          {% set start = page - 2 if page - 2 > 1 else 1 %}
+          {% set end = page + 2 if page + 2 < pages else pages %}
+          {% for p in range(start, end + 1) %}
+            <li class="page-item {% if p == page %}active{% endif %}">
+              <a class="page-link" href="?page={{ p }}">{{ p }}</a>
+            </li>
+          {% endfor %}
+      
+          <!-- Bouton Suivant -->
+          <li class="page-item {% if page >= pages %}disabled{% endif %}">
+            <a class="page-link" href="?page={{ page + 1 if page < pages else pages }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+      
+        </ul>
+      </nav>
+      
       <div class="table-responsive table-container">
         <table class="table table-striped" id="employe-table">
           <thead>
@@ -38,7 +65,7 @@
                 <div class="d-flex gap-2">
                   <a href="/employes/edit/{{ employe.id }}" class=" mr-2">
                     <span class="input-group-prepend hover-cursor">
-                      <span class="input-group-text bg-success">
+                      <span class="input-group-text bg-primary">
                         <i class="icon-paper text-white"></i>
                       </span>
                     </span>

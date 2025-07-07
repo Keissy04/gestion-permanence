@@ -32,11 +32,11 @@ def create_form(request: Request, db: Session = Depends(get_db)):
 @router.post("/gradeparposte/create")
 def create_relation(
     request: Request,
-    grade_id: int = Form(...),
-    poste_id: int = Form(...),
+    id_grade: int = Form(...),
+    id_poste: int = Form(...),
     db: Session = Depends(get_db)
 ):
-    relation = GradeParPoste(grade_id=grade_id, poste_id=poste_id)
+    relation = GradeParPoste(id_grade=id_grade, id_poste=id_poste)
     db.add(relation)
     db.commit()
     return RedirectResponse(url="/gradeparposte", status_code=303)
@@ -60,14 +60,14 @@ def edit_form(id: int, request: Request, db: Session = Depends(get_db)):
 def update_relation(
     id: int,
     request: Request,
-    grade_id: int = Form(...),
-    poste_id: int = Form(...),
+    id_grade: int = Form(...),
+    id_poste: int = Form(...),
     db: Session = Depends(get_db)
 ):
     relation = db.query(GradeParPoste).filter(GradeParPoste.id == id).first()
     if relation:
-        relation.grade_id = grade_id
-        relation.poste_id = poste_id
+        relation.id_grade = id_grade
+        relation.id_poste = id_poste
         db.commit()
     return RedirectResponse(url="/gradeparposte", status_code=303)
 
