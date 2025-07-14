@@ -1,0 +1,34 @@
+{% extends "views/layout/base.html" %}
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Nouvelle permanence</h4>
+
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <form method="post">
+        <div class="form-group">
+          <label>Employé</label>
+          <select name="id_employe_grade" class="form-control" required>
+            {% for eg in employe_grades %}
+              <option value="{{ eg.id }}">
+                {{ eg.employe.nom }} ({{ eg.grade_par_poste.grade.nom }} - {{ eg.grade_par_poste.poste.nom }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Date de permanence</label>
+          <input type="date" name="date_permanence" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Valider</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

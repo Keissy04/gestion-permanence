@@ -1,0 +1,70 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+
+<div class="col-md-8 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Ajout d'un remplacement</h4>
+      <p class="card-description">Créer une nouvelle entrée de remplacement</p>
+      <br>
+
+      <form method="post" action="/remplacements/create">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Remplaçant</label>
+              <select name="id_employe_grade" class="form-control" required>
+                {% for eg in employe_grades %}
+                  <option value="{{ eg.id }}">
+                    {{ eg.employe.nom }} ({{ eg.grade_par_poste.grade.nom }} - {{ eg.grade_par_poste.poste.nom }})
+                  </option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Tour de garde</label>
+              <select name="id_tour" class="form-control" required>
+                {% for tour in tours %}
+                  <option value="{{ tour.id }}">{{ tour.nom }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Date début</label>
+              <input type="date" name="date_debut" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Date fin</label>
+              <input type="date" name="date_fin" class="form-control" required>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="mb-3">
+              <label class="form-label">Personne remplacée (optionnel)</label>
+              <select name="id_remplace" class="form-control">
+                <option value="">-- Aucun --</option>
+                {% for p in permanences %}
+                  <option value="{{ p.id }}">{{ p.employe_grade.employe.nom }} - {{ p.date_permanence }}</option>
+                {% endfor %}
+              </select>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Description</label>
+              <textarea name="description" class="form-control" rows="4" placeholder="Ex: Maladie indisponible 5j dès 2025-07-10"></textarea>
+            </div>
+
+            <br>
+            <button type="submit" class="btn btn-primary form-control">Créer</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

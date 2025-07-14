@@ -1,71 +1,54 @@
-{% extends "views/layout/base.html" %}
+{% extends 'views/layout/base.html' %}
 
 {% block content %}
+<div class="content-wrapper">
+  <section class="content-header">
+    <h1>Planning V07 <small>Vue personnalisée</small></h1>
+  </section>
 
-	<div ><a href="" class="btn btn-primary form-control">Nouveau</a></div>
-    <div class="col-lg-8 grid-margin stretch-card">
-        <div class="card">
-          <div class="card-body">
-            <br>
-            <h4 class="card-title text-dark">Liste des utilisateurs d'équipement</h4>
-            <li class="nav-item nav-search d-none d-lg-block" style="width: 500px">
-                <div class="input-group">
-                  <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                    <span class="input-group-text" id="search">
-                      <i class="icon-search"></i>
-                    </span>
-                  </div>
-                  <input type="text" class="form-control" placeholder="Chercher un utilisateur" aria-label="search" aria-describedby="search" id="search-input">
+  <section class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="elegant-calencar d-md-flex">
+            <div class="wrap-header d-flex align-items-center img"
+                 style="background-image: url('/static/assets/calendar/images/bg.jpg');">
+              <p id="reset">Today</p>
+              <div id="header" class="p-0">
+                <div class="head-info">
+                  <div class="head-month"></div>
+                  <div class="head-day"></div>
                 </div>
-              </li>
-              <br>
-              <br><br>
-              <div class="table-responsive table-container">
-                <table class="table table-striped " id="employees-table">
-                    <thead>
-                        <tr>
-                            <th>Nom</th>
-
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       <tr>
-                                <td>Rakoto</td>
-
-                                <td>
-                                    <div class="d-flex gap-2">
-                                        <a href="" class=" mr-2">
-                                            <span class="input-group-prepend hover-cursor " id="navbar-search-icon">
-                                                <span class="input-group-text bg-warning" id="search">
-                                                    <i class="icon-plus text-white"></i>
-                                                </span>
-                                            </span>
-                                        </a>
-                                    
-                                        <a href="" class="mr-2">
-                                            <span class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                                <span class="input-group-text bg-primary" id="search">
-                                                  <i class="icon-paper text-white"></i>
-                                                </span>
-                                            </span>
-                                        </a>
-                                        
-                                        <a href="" class="mr-2">
-                                            <span class="input-group-prepend hover-cursor" id="navbar-search-icon">
-                                                <span class="input-group-text bg-danger" id="search">
-                                                  <i class="icon-trash text-white"></i>
-                                                </span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
-                    </tbody>
-                </table>
               </div>
+            </div>
+            <div class="calendar-wrap">
+              <div class="w-100 button-wrap">
+                <div class="pre-button d-flex align-items-center justify-content-center">
+                  <i class="fa fa-chevron-left"></i>
+                </div>
+                <div class="next-button d-flex align-items-center justify-content-center">
+                  <i class="fa fa-chevron-right"></i>
+                </div>
+              </div>
+              <table id="calendar">
+                <thead>
+                  <tr>
+                    <th>Sun</th><th>Mon</th><th>Tue</th>
+                    <th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for _ in range(6) %}
+                    <tr>{% for _ in range(7) %}<td></td>{% endfor %}</tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
+      </div>
     </div>
-
+  </section>
+</div>
 {% endblock %}
+

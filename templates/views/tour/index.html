@@ -20,8 +20,23 @@
             <tr>
               <td>{{ tour.nom }}</td>
               <td>
-                <a href="/tours/edit/{{ tour.id }}" class="btn btn-sm btn-warning">Modifier</a>
-                <a href="/tours/delete/{{ tour.id }}" class="btn btn-sm btn-danger" onclick="return confirm('Supprimer ce tour ?');">Supprimer</a>
+                <div class="d-flex gap-2">
+                  <a href="/tours/edit/{{ tour.id }}" class="mr-2">
+                    <span class="input-group-prepend hover-cursor">
+                      <span class="input-group-text bg-primary">
+                        <i class="icon-paper text-white"></i>
+                      </span>
+                    </span>
+                  </a>
+                  <a href="/tours/delete/{{ tour.id }}" onclick="return confirm('Supprimer ce tour ?');" class="mr-2">
+                    <span class="input-group-prepend hover-cursor">
+                      <span class="input-group-text bg-danger">
+                        <i class="icon-trash text-white"></i>
+                      </span>
+                    </span>
+                  </a>
+                </div>
+                
               </td>
             </tr>
             {% endfor %}

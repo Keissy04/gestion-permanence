@@ -1,0 +1,55 @@
+{% extends "views/layout/base.html" %}
+{% block content %}
+<div class="col-md-8 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Modifier Remplacement</h4>
+      {% if error %}<div class="alert alert-danger">{{ error }}</div>{% endif %}
+      <form method="post">
+        <div class="form-group">
+          <label>Employé</label>
+          <select name="id_employe_grade" class="form-control" required>
+            {% for eg in employe_grades %}
+            <option value="{{ eg.id }}" {% if eg.id == remplacement.id_employe_grade %}selected{% endif %}>
+              {{ eg.employe.nom }} ({{ eg.grade_par_poste.grade.nom }} - {{ eg.grade_par_poste.poste.nom }})
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tour</label>
+          <select name="id_tour" class="form-control" required>
+            {% for t in tours %}
+            <option value="{{ t.id }}" {% if t.id == remplacement.id_tour %}selected{% endif %}>{{ t.nom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Date début</label>
+          <input type="date" name="date_debut" class="form-control" value="{{ remplacement.date_debut }}" required>
+        </div>
+        <div class="form-group">
+          <label>Date fin</label>
+          <input type="date" name="date_fin" class="form-control" value="{{ remplacement.date_fin }}" required>
+        </div>
+        <div class="form-group">
+          <label>Personne remplacée (optionnel)</label>
+          <select name="id_remplace" class="form-control">
+            <option value="">-- Aucun --</option>
+            {% for p in permanences %}
+            <option value="{{ p.id }}" {% if p.id == remplacement.id_remplace %}selected{% endif %}>
+              {{ p.employe_grade.employe.nom }} - {{ p.date_permanence }}
+            </option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea name="description" class="form-control">{{ remplacement.description }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Valider</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

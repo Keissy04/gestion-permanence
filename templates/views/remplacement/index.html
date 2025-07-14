@@ -1,0 +1,81 @@
+{% extends "views/layout/base.html" %}
+
+{% block content %}
+
+<div><a href="/remplacements/create" class="btn btn-primary form-control">Nouveau remplacement</a></div>
+
+<div class="col-lg-12 grid-margin stretch-card mt-3">
+  <div class="card">
+    <div class="card-body">
+      <br>
+      <h4 class="card-title text-dark">Liste des remplacements</h4>
+
+      <li class="nav-item nav-search d-none d-lg-block" style="width: 500px">
+        <div class="input-group">
+          <div class="input-group-prepend hover-cursor" id="navbar-search-icon">
+            <span class="input-group-text" id="search">
+              <i class="icon-search"></i>
+            </span>
+          </div>
+          <input type="text" class="form-control" placeholder="Chercher un nom ou une date" id="search-input">
+        </div>
+      </li>
+
+      <br><br><br>
+
+      <div class="table-responsive table-container">
+        <table class="table table-striped" id="remplacement-table">
+          <thead>
+            <tr>
+              <th>Remplaçant</th>
+              <th>Grade - Poste</th>
+              <th>Tour</th>
+              <th>Disponibilité</th>
+              <th>Remplace</th>
+              <th>Description</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for remplacement in remplacements %}
+            <tr>
+              <td>{{ remplacement.employe_grade.employe.nom }}</td>
+              <td>{{ remplacement.employe_grade.grade_par_poste.grade.nom }} - {{ remplacement.employe_grade.grade_par_poste.poste.nom }}</td>
+              <td>{{ remplacement.tour.nom }}</td>
+              <td>{{ remplacement.date_debut }} au {{ remplacement.date_fin }}</td>
+              <td>
+                {% if remplacement.permanence %}
+                  {{ remplacement.permanence.employe_grade.employe.nom }} ({{ remplacement.permanence.date_permanence }})
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>{{ remplacement.description or "-" }}</td>
+              <td>
+                <div class="d-flex gap-2">
+                  <a href="/remplacements/edit/{{ remplacement.id }}" class="mr-2">
+                    <span class="input-group-prepend hover-cursor">
+                      <span class="input-group-text bg-success">
+                        <i class="icon-paper text-white"></i>
+                      </span>
+                    </span>
+                  </a>
+                  <a href="/remplacements/delete/{{ remplacement.id }}" onclick="return confirm('Supprimer ce remplacement ?');" class="mr-2">
+                    <span class="input-group-prepend hover-cursor">
+                      <span class="input-group-text bg-danger">
+                        <i class="icon-trash text-white"></i>
+                      </span>
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
