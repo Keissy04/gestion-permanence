@@ -11,5 +11,6 @@ class Affectation(Base):
     date_debut = Column(Date, nullable=False)
     date_fin = Column(Date, nullable=True)
 
-    employe_grade = relationship("EmployeGrade")
+    employe_grade = relationship("EmployeGrade", back_populates="affectations")
     departement = relationship("Departement")
+    

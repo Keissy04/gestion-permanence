@@ -8,7 +8,7 @@
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
-  --pink: #e83e8c;
+  --pink: #57B657;
   --red: #dc3545;
   --orange: #fd7e14;
   --yellow: #ffc107;
@@ -417,7 +417,7 @@ mark,
 
 code {
   font-size: 87.5%;
-  color: #e83e8c;
+  color: #57B657;
   word-break: break-word; }
   a > code {
     color: inherit; }
@@ -8144,7 +8144,7 @@ a {
   -webkit-transition: .3s all ease;
   -o-transition: .3s all ease;
   transition: .3s all ease;
-  color: #e13a9d; }
+  color: #57B657; }
   a:hover, a:focus {
     text-decoration: none !important;
     outline: none !important;
@@ -8159,7 +8159,7 @@ h1, h2, h3, h4, h5,
   color: #000; }
 
 .bg-primary {
-  background: #e13a9d !important; }
+  background: #57B657 !important; }
 
 .ftco-section {
   padding: 7em 0; }
@@ -8333,7 +8333,7 @@ tbody td:active {
 #today {
   color: #fff; }
   #today:after {
-    background: #e13a9d; }
+    background: #57B657; }
 
 #disabled {
   cursor: default;

@@ -34,11 +34,13 @@ def create_form(request: Request, db: Session = Depends(get_db)):
 def create(
     id_employe_grade: int = Form(...),
     date_permanence: date = Form(...),
+    is_remplace: bool = Form(False),
     db: Session = Depends(get_db)
 ):
     permanence = Permanence(
         id_employe_grade=id_employe_grade,
-        date_permanence=date_permanence
+        date_permanence=date_permanence,
+        is_remplace=is_remplace
     )
     db.add(permanence)
     db.commit()
@@ -62,13 +64,16 @@ def edit(
     id: int,
     id_employe_grade: int = Form(...),
     date_permanence: date = Form(...),
+    is_remplace: bool = Form(False),
     db: Session = Depends(get_db)
 ):
     permanence = db.query(Permanence).filter_by(id=id).first()
     permanence.id_employe_grade = id_employe_grade
     permanence.date_permanence = date_permanence
+    permanence.is_remplace = is_remplace
     db.commit()
     return RedirectResponse(url="/permanences", status_code=303)
+
 
 # --- Suppression ---
 @router.get("/permanences/delete/{id}")

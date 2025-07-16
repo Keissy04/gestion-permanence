@@ -13,3 +13,6 @@ class EmployeGrade(Base):
 
     employe = relationship("Employe")
     grade_par_poste = relationship("GradeParPoste")
+    
+    # Ajout de la relation avec affectation
+    affectations = relationship("Affectation", back_populates="employe_grade")

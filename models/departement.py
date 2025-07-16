@@ -7,3 +7,5 @@ class Departement(Base):
     id = Column(Integer, primary_key=True, index=True)
     dpt = Column(String, unique=True, nullable=False)
     abreviation = Column(String, unique=True, nullable=False)
+    email = Column(String, unique=True, nullable=False)
+    mdp = Column(String, nullable=False) 

@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 import os
-
+# from app import init_db
 from app.database import Base, engine
 from app.controllers import (
     departementController,

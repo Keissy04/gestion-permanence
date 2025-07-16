@@ -20,35 +20,32 @@
         </div>
       </li>
       <br>
+
       <nav aria-label="Page navigation" class="mt-4">
         <ul class="pagination justify-content-center">
-      
           <!-- Bouton Précédent -->
           <li class="page-item {% if page <= 1 %}disabled{% endif %}">
             <a class="page-link" href="?page={{ page - 1 if page > 1 else 1 }}" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
-      
-          <!-- Pages numérotées -->
-          {% set start = page - 2 if page - 2 > 1 else 1 %}
-          {% set end = page + 2 if page + 2 < pages else pages %}
-          {% for p in range(start, end + 1) %}
+
+          <!-- Toutes les pages -->
+          {% for p in range(1, pages + 1) %}
             <li class="page-item {% if p == page %}active{% endif %}">
               <a class="page-link" href="?page={{ p }}">{{ p }}</a>
             </li>
           {% endfor %}
-      
+
           <!-- Bouton Suivant -->
           <li class="page-item {% if page >= pages %}disabled{% endif %}">
             <a class="page-link" href="?page={{ page + 1 if page < pages else pages }}" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
-      
         </ul>
       </nav>
-      
+
       <div class="table-responsive table-container">
         <table class="table table-striped" id="employe-table">
           <thead>
@@ -63,14 +60,14 @@
               <td>{{ employe.nom }}</td>
               <td>
                 <div class="d-flex gap-2">
-                  <a href="/employes/edit/{{ employe.id }}" class=" mr-2">
+                  <a href="/employes/edit/{{ employe.id }}" class="mr-2">
                     <span class="input-group-prepend hover-cursor">
                       <span class="input-group-text bg-primary">
                         <i class="icon-paper text-white"></i>
                       </span>
                     </span>
                   </a>
-                  <a href="/employes/delete/{{ employe.id }}" class=" mr-2" onclick="return confirm('Supprimer cet employé ?');">
+                  <a href="/employes/delete/{{ employe.id }}" class="mr-2" onclick="return confirm('Supprimer cet employé ?');">
                     <span class="input-group-prepend hover-cursor">
                       <span class="input-group-text bg-danger">
                         <i class="icon-trash text-white"></i>
@@ -87,5 +84,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}

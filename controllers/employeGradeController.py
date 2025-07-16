@@ -13,7 +13,7 @@ router = APIRouter(tags=["Affectation de grade"])
 templates = Jinja2Templates(directory="app/templates")
 
 
-@router.get("/employegrades", response_class=HTMLResponse)
+@router.get("/grade_employes", response_class=HTMLResponse)
 def list_employe_grades(request: Request, db: Session = Depends(get_db), page: int = 1):
     per_page = 10
     total = db.query(EmployeGrade).count()
@@ -62,7 +62,7 @@ def create_relation(
     db.add(relation)
     db.commit()
     db.refresh(relation)
-    return RedirectResponse(url="/employegrades", status_code=303)
+    return RedirectResponse(url="/grade_employes", status_code=303)
 
 
 @router.get("/employegrades/edit/{id}", response_class=HTMLResponse)
@@ -102,7 +102,7 @@ def update_relation(
         relation.date_fin = date_fin
         db.commit()
         db.refresh(relation)
-    return RedirectResponse(url="/employegrades", status_code=303)
+    return RedirectResponse(url="/grade_employes", status_code=303)
 
 
 @router.get("/employegrades/delete/{id}")
@@ -111,4 +111,4 @@ def delete_relation(id: int, db: Session = Depends(get_db)):
     if relation:
         db.delete(relation)
         db.commit()
-    return RedirectResponse(url="/employegrades", status_code=303)
+    return RedirectResponse(url="/grade_employes", status_code=303)

@@ -4,7 +4,7 @@
 
 <div><a href="/permanences/create" class="btn btn-primary form-control">Nouvelle permanence</a></div>
 
-<div class="col-lg-8 grid-margin stretch-card mt-3">
+<div class="col-lg-10 grid-margin stretch-card mt-3">
   <div class="card">
     <div class="card-body">
       <br>
@@ -29,7 +29,9 @@
             <tr>
               <th>Employé</th>
               <th>Grade - Poste</th>
+              <th>Département</th>
               <th>Date</th>
+              <th>Présence</th>
               <th>Action</th>
             </tr>
           </thead>
@@ -37,8 +39,25 @@
             {% for permanence in permanences %}
             <tr>
               <td>{{ permanence.employe_grade.employe.nom }}</td>
-              <td>{{ permanence.employe_grade.grade_par_poste.grade.nom }} - {{ permanence.employe_grade.grade_par_poste.poste.nom }}</td>
+              <td>{{ permanence.employe_grade.grade_par_poste.grade.abreviation }} - {{ permanence.employe_grade.grade_par_poste.poste.nom }}</td>
+              <td>
+                {% for aff in permanence.employe_grade.affectations %}
+                  {% if aff.date_fin is none %}
+                    {{aff.departement.abreviation}}
+                  {% endif %}
+                {% endfor%}
+
+              </td>
               <td>{{ permanence.date_permanence }}</td>
+              <td>
+                <p class="font-weight-bold">
+                  {% if permanence.is_remplace %}
+                    <span class="text-danger">Remplacé</span>
+                  {% else %}
+                    <span class="text-primary">Présent</span>
+                  {% endif %}
+                </p>   
+              </td>
               <td>
                 <div class="d-flex gap-2">
                   <!-- Modifier -->
