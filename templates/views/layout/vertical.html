@@ -32,6 +32,7 @@
       <span class="menu-title">Grade par Poste</span>
       </a>
     </li>
+    {% if request.state.current_dept %}
     <li class="nav-item">
       <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
         <i class="icon-head menu-icon"></i>
@@ -46,7 +47,7 @@
         </ul>
       </div>
     </li>
-    
+    {% endif %}
     <li class="nav-item">
       <a class="nav-link " href="/affectations">
       <i class="icon-repeat menu-icon"></i>

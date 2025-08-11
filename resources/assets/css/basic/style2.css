@@ -1,0 +1,68 @@
+/* app/resources/assets/css/basic/style2.css */
+
+/* Contexte de la page d'accueil uniquement */
+.home-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: calc(100vh - 70px);
+    padding: 20px 20px 0;
+  }
+  
+  .home-wrap .main-container {
+    width: 800px;
+    height: 400px;
+    background-color: #fff;
+    display: flex;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  
+  .home-wrap .image-container {
+    flex: 0 0 auto;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .home-wrap .image-container img {
+    height: 100%;
+    width: auto;
+    display: block;
+  }
+  
+  .home-wrap .text-container {
+    flex: 1;
+    padding: 30px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .home-wrap .text-container h1 {
+    margin: 0 0 20px;
+    font-size: 1.8rem;
+    color: #333;
+  }
+  
+  .home-wrap .text-container p {
+    margin: 0 0 30px;
+    line-height: 1.5;
+    color: #555;
+  }
+  
+  .home-wrap .btn-connect {
+    align-self: flex-start;
+    padding: 12px 24px;
+    border: none;
+    background-color: #007BFF;
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+  
+  .home-wrap .btn-connect:hover {
+    background-color: #0056b3;
+  }
+  

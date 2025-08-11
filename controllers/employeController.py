@@ -5,12 +5,19 @@ from sqlalchemy.orm import Session
 from app.database import get_db
 from app.models.employe import Employe
 
+# test auth
+from app.utils.auth import get_current_departement
+
 router = APIRouter(tags=["Employés HTML"])
 templates = Jinja2Templates(directory="app/templates")
 
 # Liste
 @router.get("/employes", response_class=HTMLResponse)
-def list_employes(request: Request, db: Session = Depends(get_db), page: int = 1):
+def list_employes(request: Request,
+                  db: Session = Depends(get_db),
+                  page: int = 1,
+                  current_dpt = Depends(get_current_departement)):
+    
     per_page = 5
     total = db.query(Employe).count()
     pages = (total + per_page - 1) // per_page
@@ -20,7 +27,8 @@ def list_employes(request: Request, db: Session = Depends(get_db), page: int = 1
         "request": request,
         "employes": employes,
         "page": page,
-        "pages": pages
+        "pages": pages,
+        "departement": current_dpt
     })
 # Création - formulaire
 @router.get("/employes/create", response_class=HTMLResponse)
