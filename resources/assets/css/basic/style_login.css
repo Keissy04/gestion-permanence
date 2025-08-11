@@ -1,0 +1,87 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #f5f7fb;
+  }
+  /* Centre la pile (logo + carte) */
+  .page {
+    min-height: 100%;
+    display: flex;
+    align-items: center;          /* centre verticalement */
+    justify-content: center;      /* centre horizontalement */
+    padding: 24px;
+  }
+  .stack {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;                    /* espace entre le logo et le div */
+  }
+
+  /* Logo au-dessus, centré */
+  .logo {
+    display: block;
+    height: 62px;                 /* ajuste selon ton image */
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.06));
+  }
+
+  /* Div du formulaire (≈400x400) */
+  .login-card {
+    width: 400px;
+    min-height: 320px;            /* tu peux mettre 400px si tu veux strictement carré */
+    background: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 12px 28px rgba(16,24,40,0.08);
+    padding: 24px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;      /* centre les champs dans la carte */
+    gap: 14px;
+  }
+
+  .form {
+    display: grid;
+    gap: 12px;
+  }
+  .field {
+    display: grid;
+    gap: 6px;
+  }
+  .label {
+    font-size: 0.9rem;
+    color: #374151;
+  }
+  .input {
+    height: 44px;
+    padding: 0 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    outline: none;
+    font-size: 0.95rem;
+    transition: border-color .15s, box-shadow .15s;
+    background: #fff;
+  }
+  .input:focus {
+    border-color: #57B657;
+    box-shadow: 0 0 0 4px rgba(37,99,235,0.12);
+  }
+
+  .btn {
+    height: 46px;
+    border: 0;
+    border-radius: 6px;
+    background: #57B657;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: .02em;
+    cursor: pointer;
+    transition: transform .05s ease, background .15s ease;
+    text-transform: uppercase;    
+  }
+  .btn:hover { background: #338233; }
+  .btn:active { transform: translateY(1px); }

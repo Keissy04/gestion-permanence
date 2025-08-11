@@ -54,7 +54,7 @@
     align-self: flex-start;
     padding: 12px 24px;
     border: none;
-    background-color: #007BFF;
+    background-color: #57B657;
     color: #fff;
     font-size: 1rem;
     border-radius: 4px;
@@ -63,6 +63,6 @@
   }
   
   .home-wrap .btn-connect:hover {
-    background-color: #0056b3;
+    background-color: #338233;
   }
   

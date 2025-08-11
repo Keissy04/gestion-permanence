@@ -1,4 +1,5 @@
 import os
+import uuid
 from pathlib import Path
 
 from fastapi import FastAPI, Request
@@ -7,7 +8,8 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.middleware.sessions import SessionMiddleware
 
-from app.database import Base, engine, get_db
+from sqlalchemy.orm import Session
+from app.database import Base, engine
 from app.controllers import (
     auth_controller,
     departementController,
@@ -22,17 +24,23 @@ from app.controllers import (
     permanenceController,
     homeController,
 )
-from fastapi import Request
 from app.models.departement import Departement
-from sqlalchemy.orm import Session
 
 # Création de l'application FastAPI
 template_dir = Path(__file__).resolve().parent / "templates"
 static_dir = Path(__file__).resolve().parent / "resources"
 app = FastAPI()
 
+# Identifiant de démarrage (change à chaque démarrage)
+app.state.boot_id = uuid.uuid4().hex
+
+# Middleware d'attachement du département courant + invalidation si boot_id différent
 @app.middleware("http")
 async def attach_current_departement(request: Request, call_next):
+    # Invalidation de session si le serveur a redémarré
+    if request.session.get("boot_id") != request.app.state.boot_id:
+        request.session.clear()
+
     # On récupère l'ID stocké en session
     departement_id = request.session.get("departement_id")
     request.state.current_dept = None
@@ -40,9 +48,12 @@ async def attach_current_departement(request: Request, call_next):
         # Ouvrir une session manuelle
         with engine.connect() as conn:
             session = Session(bind=conn)
-            dpt = session.get(Departement, departement_id)
-            request.state.current_dept = dpt
-            session.close()
+            try:
+                dpt = session.get(Departement, departement_id)
+                request.state.current_dept = dpt
+            finally:
+                session.close()
+
     response = await call_next(request)
     return response
 
@@ -52,6 +63,7 @@ app.add_middleware(
     SessionMiddleware,
     secret_key=tmp_secret,
     session_cookie="session",
+    # max_age=3600,  # (optionnel) TTL cookie 1h
 )
 
 # Mount du répertoire static
@@ -60,10 +72,10 @@ app.mount(
     "/static", StaticFiles(directory=os.path.join(BASE_DIR, "app/resources")), name="static"
 )
 
-# Configuration des templates Jinja2
+# Templates Jinja2
 templates = Jinja2Templates(directory="app/templates")
 
-# Initialisation de la base de données (création des tables)
+# Initialisation DB
 Base.metadata.create_all(bind=engine)
 
 # Inclusion des routes
@@ -84,7 +96,7 @@ enable_routers = [
 for router in enable_routers:
     app.include_router(router)
 
-# Route d'accueil (redirection vers la page de login)
+# Route d'accueil
 @app.get("/", response_class=HTMLResponse)
 def root(request: Request):
     return RedirectResponse(url="/accueil")
