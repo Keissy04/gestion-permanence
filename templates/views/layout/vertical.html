@@ -1,5 +1,7 @@
 <nav class="sidebar sidebar-offcanvas " id="sidebar">
   <ul class="nav">
+
+    {% if request.state.current_dept %}
       <li class="nav-item">
           <a class="nav-link" href="">
             <i class="icon-grid menu-icon"></i>
@@ -46,7 +48,6 @@
         </ul>
       </div>
     </li>
-    
     <li class="nav-item">
       <a class="nav-link " href="/affectations">
       <i class="icon-repeat menu-icon"></i>
@@ -71,5 +72,23 @@
       <span class="menu-title">Permanences</span>
       </a>
     </li>
+    {% else %}
+    <li class="nav-item">
+      <a class="nav-link " href="/login">
+      <i class="icon-head menu-icon"></i>
+      <span class="menu-title">Se connecter</span>
+      </a>
+    </li>
+    {% endif %}
   </ul>
 </nav>
+
+<!-- <h6>A faire:
+  _manova anle remplacement(supprimer le description ainsi que le id_remplace)
+  _mcréer table remplacé
+  _mcréer table employe_infos(id_emp,photo)
+  _manohy anle IA resaka mijery jour
+  _manao export pdf
+  _mangataka access @ caméra de surveillance
+
+</h6> -->

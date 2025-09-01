@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<div><a href="/permanences/create" class="btn btn-primary form-control">Nouvelle permanence</a></div>
+<div><a href="/remplacants/create" class="btn btn-primary form-control">Nouveau remplaçant</a></div>
 <br>
 <div class="col-lg-12 grid-margin stretch-card mt-3">
   <div class="card">
     <div class="card-body">
       <br>
-      <h4 class="card-title text-dark">Liste des permanences</h4>
+      <h4 class="card-title text-dark">Liste des remplaçants</h4>
 
       <li class="nav-item nav-search d-none d-lg-block" style="width: 500px">
         <div class="input-group">
@@ -24,53 +24,48 @@
       <br><br><br>
 
       <div class="table-responsive table-container">
-        <table class="table table-striped" id="permanence-table">
+        <table class="table table-striped" id="remplacant-table">
           <thead>
             <tr>
               <th>Employé</th>
               <th>Grade - Poste</th>
               <th>Département</th>
-              <th>Date</th>
-              <th>Présence</th>
-              <th>Action</th>
+              <th>Tour</th> {# Nouvelle colonne #}
+              <th>Début</th>
+              <th>Fin</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            {% for permanence in permanences %}
+            {% for r in remplacants %}
+            {% set g = r.employe_grade.grade_par_poste.grade %}
             <tr>
-              <td>{{ permanence.employe_grade.employe.nom }}</td>
-              <td>{{ permanence.employe_grade.grade_par_poste.grade.abreviation }} - {{ permanence.employe_grade.grade_par_poste.poste.nom }}</td>
+              <td>{{ r.employe_grade.employe.nom }}</td>
+              <td>{{ (g.abreviation if g and g.abreviation else (g.titre if g else '—')) }} - {{ r.employe_grade.grade_par_poste.poste.nom }}</td>
+          
               <td>
-                {% for aff in permanence.employe_grade.affectations %}
-                  {% if aff.date_fin is none %}
-                    {{aff.departement.abreviation}}
-                  {% endif %}
-                {% endfor%}
-
+                {% set dep_aff = (r.employe_grade.affectations | selectattr('date_fin', 'equalto', None) | list) %}
+                {% if dep_aff and dep_aff[0].departement %}
+                  {{ dep_aff[0].departement.abreviation }}
+                {% else %}
+                  —
+                {% endif %}
               </td>
-              <td>{{ permanence.date_permanence }}</td>
-              <td>
-                <p class="font-weight-bold">
-                  {% if permanence.is_remplace %}
-                    <span class="text-danger">Remplacé</span>
-                  {% else %}
-                    <span class="text-primary">Présent</span>
-                  {% endif %}
-                </p>   
-              </td>
+          
+              <td>{{ r.tour.nom if r.tour else "—" }}</td>  {# Nom du tour #}
+          
+              <td>{{ r.date_debut }}</td>
+              <td>{{ r.date_fin or "En cours" }}</td>
               <td>
                 <div class="d-flex gap-2">
-                  <!-- Modifier -->
-                  <a href="/permanences/edit/{{ permanence.id }}" class="mr-2">
+                  <a href="/remplacants/edit/{{ r.id }}" class="mr-2">
                     <span class="input-group-prepend hover-cursor">
                       <span class="input-group-text bg-primary">
                         <i class="icon-paper text-white"></i>
                       </span>
                     </span>
                   </a>
-
-                  <!-- Supprimer -->
-                  <a href="/permanences/delete/{{ permanence.id }}" onclick="return confirm('Supprimer cette permanence ?');" class="mr-2">
+                  <a href="/remplacants/delete/{{ r.id }}" onclick="return confirm('Supprimer ce remplaçant ?');" class="mr-2">
                     <span class="input-group-prepend hover-cursor">
                       <span class="input-group-text bg-danger">
                         <i class="icon-trash text-white"></i>
@@ -82,8 +77,10 @@
             </tr>
             {% endfor %}
           </tbody>
+          
         </table>
       </div>
+
     </div>
   </div>
 </div>

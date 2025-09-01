@@ -1,0 +1,121 @@
+/* app/resources/assets/css/basic/style2.css */
+
+/* Contexte de la page d'accueil uniquement */
+.home-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: calc(100vh - 70px); /* ajuste selon la hauteur de ton header */
+  padding: 20px 20px 0;
+}
+
+/* ----- Desktop par défaut ----- */
+.home-wrap .main-container {
+  display: flex;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  width: min(100%, 960px); /* max 960px, sinon prend la largeur dispo */
+  min-height: 360px;
+}
+
+.home-wrap .image-container {
+  flex: 0 0 40%;
+  height: auto;
+  overflow: hidden;
+}
+
+.home-wrap .image-container img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* couvre le bloc proprement */
+}
+
+.home-wrap .text-container {
+  flex: 1;
+  padding: clamp(16px, 3vw, 30px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-wrap .text-container h1 {
+  margin: 0 0 16px;
+  font-size: clamp(1.25rem, 1.2rem + 0.8vw, 1.8rem);
+  color: #333;
+}
+
+.home-wrap .text-container p {
+  margin: 0 0 24px;
+  line-height: 1.5;
+  color: #555;
+  font-size: clamp(0.95rem, 0.9rem + 0.3vw, 1.05rem);
+}
+
+.home-wrap .btn-connect {
+  align-self: flex-start;
+  padding: 12px 24px;
+  border: none;
+  background-color: #57B657;
+  color: #fff;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.home-wrap .btn-connect:hover { background-color: #338233; }
+
+/* ----- Tablette (≤ 992px) ----- */
+@media (max-width: 992px) {
+  .home-wrap {
+    padding: 16px 16px 0;
+    min-height: calc(100vh - 60px);
+  }
+
+  .home-wrap .main-container {
+    width: min(100%, 820px);
+    min-height: 320px;
+  }
+
+  .home-wrap .image-container { flex-basis: 45%; }
+}
+
+/* ----- Mobile (≤ 768px) ----- */
+@media (max-width: 768px) {
+  .home-wrap .main-container {
+    flex-direction: column;         /* image au-dessus, texte en dessous */
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;               /* plus “flat” sur mobile */
+  }
+
+  .home-wrap .image-container {
+    flex: 0 0 auto;
+    max-height: 40vh;
+  }
+
+  .home-wrap .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .home-wrap .text-container {
+    padding: 16px;
+  }
+
+  .home-wrap .btn-connect {
+    width: 100%;                    /* bouton pleine largeur sur mobile */
+    text-align: center;
+  }
+}
+
+/* ----- Très petit (≤ 480px) ----- */
+@media (max-width: 480px) {
+  .home-wrap { padding: 12px 12px 0; }
+
+  .home-wrap .text-container h1 { margin-bottom: 12px; }
+  .home-wrap .text-container p  { margin-bottom: 16px; }
+}

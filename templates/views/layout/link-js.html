@@ -7,7 +7,7 @@
 <script src="/static/assets/vendors/datatables.net/jquery.dataTables.js"></script>
 <script src="/static/assets/vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
 <script src="/static/assets/js/dataTables.select.min.js"></script>
-<script src="/static/assets/js/html2pdf.bundle.js"></script>
+<!-- <script src="/static/assets/js/html2pdf.bundle.js"></script> -->
 <!-- End plugin js for this page -->
 
 <!-- inject:js -->
@@ -29,7 +29,6 @@
 <!-- Lien Chart -->
 {# <script src="/static/assets/js/chart.js"></script> #}
 
-<!-- Calendar -->
 
 <script>
     document.querySelectorAll('input.form-control').forEach(input => {
@@ -38,7 +37,6 @@
         const container = this.closest('.card, .table-container, .grid-margin') || document;
         const table = container.querySelector('table');
         const rows = table?.querySelectorAll('tbody tr') || [];
-  
         rows.forEach(row => {
           const rowText = row.textContent.toLowerCase();
           row.style.display = rowText.includes(filter) ? '' : 'none';
