@@ -3,7 +3,7 @@
 {% block content %}
 <div><a href="/affectations/create" class="btn btn-primary form-control">Nouveau</a></div>
 
-<div class="col-lg-8 grid-margin stretch-card mt-3">
+<div class="col-lg-10 grid-margin stretch-card mt-3">
   <div class="card">
     <div class="card-body">
       <h4 class="card-title text-dark">Liste des affectations</h4>
@@ -35,7 +35,7 @@
           <tbody>
             {% for affectation in affectations %}
             <tr>
-              <td> {{ affectation.employe_grade.employe.nom }} ({{ affectation.employe_grade.grade_par_poste.grade.nom }} - {{ affectation.employe_grade.grade_par_poste.poste.nom }})</td>
+              <td>{{ affectation.employe_grade.grade_par_poste.grade.abreviation }} - {{ affectation.employe_grade.employe.nom }} ({{ affectation.employe_grade.grade_par_poste.poste.nom }})</td>
               <td>{{ affectation.departement.abreviation }}</td>
               <td>{{ affectation.date_debut }}</td>
               <td>{{ affectation.date_fin or "En cours" }}</td>

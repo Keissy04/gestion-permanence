@@ -1,0 +1,50 @@
+{% extends "views/layout/base.html" %}
+{% block content %}
+<div class="col-md-6 grid-margin stretch-card">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Modifier un remplaçant</h4>
+
+      {% if error %}
+        <div class="alert alert-danger">{{ error }}</div>
+      {% endif %}
+
+      <form method="post">
+        <div class="form-group">
+          <label>Tour (optionnel)</label>
+          <select name="id_tour" class="form-control">
+            <option value="">-- Aucun --</option>
+            {% for t in tours %}
+              <option value="{{ t.id }}" {% if remplacant.id_tour == t.id %}selected{% endif %}>{{ t.nom }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Employé</label>
+          <select name="id_employe_grade" class="form-control" required>
+            {% for eg in employe_grades %}
+              <option value="{{ eg.id }}" {% if eg.id == remplacant.id_employe_grade %}selected{% endif %}>
+                {{ eg.employe.nom }}
+                ({{ eg.grade_par_poste.grade.abreviation or eg.grade_par_poste.grade.titre }}
+                 - {{ eg.grade_par_poste.poste.nom }})
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Date de début</label>
+          <input type="date" name="date_debut" class="form-control" value="{{ remplacant.date_debut }}" required>
+        </div>
+
+        <div class="form-group">
+          <label>Date de fin (optionnel)</label>
+          <input type="date" name="date_fin" class="form-control" value="{{ remplacant.date_fin or '' }}">
+        </div>
+
+        <button type="submit" class="btn btn-success form-control">Modifier</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

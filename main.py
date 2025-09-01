@@ -23,6 +23,7 @@ from app.controllers import (
     remplacementController,
     permanenceController,
     homeController,
+    remplacantController,
 )
 from app.models.departement import Departement
 
@@ -92,6 +93,7 @@ enable_routers = [
     remplacementController.router,
     permanenceController.router,
     homeController.router,
+    remplacantController.router,
 ]
 for router in enable_routers:
     app.include_router(router)
@@ -100,3 +102,26 @@ for router in enable_routers:
 @app.get("/", response_class=HTMLResponse)
 def root(request: Request):
     return RedirectResponse(url="/accueil")
+
+# <script>
+#     // Export pdf
+#            // Add click event listener to the export button
+#            document.addEventListener('DOMContentLoaded', function() {
+#                var exportPdf = html2pdf();
+#                var exportButton = document.getElementById('exportButton');
+#                var chartCanvas = document.getElementById('card-body');
+
+#                var exportToPdf = function() {
+#                    exportPdf.set({
+#                        margin: [10, 10, 10, 10],
+#                        filename: 'facture.pdf',
+#                        image: { type: 'jpeg', quality: 0.98 },
+#                        html2canvas: { scale: 2 },
+#                        jsPDF: { unit: 'mm', format: 'a4', orientation: 'paysage'}
+#                    });
+
+#                    exportPdf.from(chartCanvas).save();
+#                };
+#                exportButton.addEventListener('click', exportToPdf);
+#            });
+#    </script>

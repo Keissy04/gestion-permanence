@@ -18,7 +18,7 @@ def list_employes(request: Request,
                   page: int = 1,
                   current_dpt = Depends(get_current_departement)):
     
-    per_page = 5
+    per_page = 10
     total = db.query(Employe).count()
     pages = (total + per_page - 1) // per_page
     employes = db.query(Employe).offset((page - 1) * per_page).limit(per_page).all()
